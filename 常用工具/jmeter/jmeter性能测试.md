@@ -4,7 +4,7 @@
 
 2、编辑/etc/profile文件配置Jmeter的环境变量
 
-export PATH=/*/jemter*/bin/:$PATH
+export PATH=/jemter/bin/:$PATH
 
 3、将编辑好的脚本拷贝到Linux下
 4、使用命令执行脚本：
