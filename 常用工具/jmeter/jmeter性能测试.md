@@ -1,22 +1,9 @@
-一、Linux下JDK的安装及环境变量的配置
-1、 使用命令uname –a查看系统的版本确定系统的位数，然后去JDK官网下载相应位数的安装程序，进行安装。
- 
-2、  使用rz命令将下载的JDK上传至Linux系统的/usr/java下，如果没有这个目录则创建这个目录后进行上传
- 
-3、  解压安装：使用tar –zxvf JDK的名称进行解压
- 
-4、  配置环境变量
-打开/etc/profile（sudo vim /etc/profile）在最后面添加如下内容：
- 
-![](file:///C:/Users/zhangjunchao/Desktop/新建文件夹/1.png)
-5、  输入命令：source /etc/profile让配置生效
- 
-6、  验证:输入命令Java –version
- 
-二、Linux下Jmeter的安装及环境变量的配置
+一、Linux下Jmeter的安装及环境变量的配置
 1、将Jmeter的安装包上传至Linux的/opt目录下，解压
 
 2、编辑/etc/profile文件配置Jmeter的环境变量
+
+export PATH=/*/jemter*/bin/:$PATH
 
 3、将编辑好的脚本拷贝到Linux下
 4、使用命令执行脚本：
@@ -33,15 +20,14 @@ jmeter -n -t bugfree-create.jmx -l test.jtl
 注意：如果未设置Jmeter的环境变量则在执行脚本的时候需要检查当前目录是否是jmetet的bin 目录下
 运行示意图：
 
-三、运行结果的查看
+二、运行结果的查看
 1、将运行脚本产生的test.jtl文件到处到windows系统下（注意：window下安装的Jmeter和JDK要和Linux的保持一致）
-2、在windows系统下打开Jmeter，创建一个线程组，在线程组下添加监听器，如下图：
+2、在windows系统下打开Jmeter，创建一个线程组，在线程组下添加监听器
 
-3、点击界面上的浏览按钮，将到处的文件添加进来即可看到脚本测试的报告，如下图：
+3、点击界面上的浏览按钮，将到处的文件添加进来即可看到脚本测试的报告
 
 
-
-3. 测试实例
+三. 测试实例
 我们选取最常见的百度搜索接口：
 
 3.1 接口地址
@@ -54,7 +40,7 @@ wd: 搜索词
 3.3 返回结果
 搜索结果，我们可以通过校验结果中是否含有搜索词wd来判断本次请求成功或失败。
 
-4. JMeter脚本编写
+四. JMeter脚本编写
 4.1 添加线程组
 右键点击“测试计划” -> “添加” -> “Threads(Users)” -> “线程组” 
  
@@ -122,7 +108,7 @@ Content encoding ：编码方式，默认为ISO-8859-1编码，这里配置为ut
  
 这样，我们就完成了一个完整Http接口的JMeter性能测试脚本编写。
 
-5. 执行性能测试
+五. 执行性能测试
 5.1 配置线程组
 点击线程组，配置本次性能测试相关参数：线程数，循环次数，持续时间等，这里我们配置并发用户数为10，持续时间为60s 
 
