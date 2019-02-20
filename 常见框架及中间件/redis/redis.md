@@ -4,7 +4,8 @@ wget http://download.redis.io/releases/redis-4.0.2.tar.gz
 tar xzf redis-4.0.2.tar.gz
 cd redis-4.0.2
 make install
-Redis没有其他外部依赖，安装过程很简单。编译后在Redis源代码目录的src文件夹中可以找到若干个可执行程序，安装完后，在/usr/local/bin目录中可以找到刚刚安装的redis可执行文件。
+Redis没有其他外部依赖，安装过程很简单。编译后在Redis源代码目录的src文件夹中可以找到若干个可执行程序，安装完后，
+在/usr/local/bin目录中可以找到刚刚安装的redis可执行文件。
 
 启动和停止Redis
 启动Redis
