@@ -1,3 +1,5 @@
+package.json 是一个指定npm依赖的文件
+
 概述
 package.json必须是一个严格的json文件，而不仅仅是js里边的一个对象。其中很多属性可以通过npm-config来生成。
 
