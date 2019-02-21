@@ -1,5 +1,5 @@
 概述
-本文档是自己看官方文档的理解+翻译，内容是package.json配置里边的属性含义。package.json必须是一个严格的json文件，而不仅仅是js里边的一个对象。其中很多属性可以通过npm-config来生成。
+package.json必须是一个严格的json文件，而不仅仅是js里边的一个对象。其中很多属性可以通过npm-config来生成。
 
 name
 package.json中最重要的属性是name和version两个属性，这两个属性是必须要有的，否则模块就无法被安装，这两个属性一起形成了一个npm模块的唯一标识符。模块中内容变更的同时，模块版本也应该一起变化。
@@ -29,7 +29,6 @@ keywords
 homepage
 项目主页url
 注意: 这个项目主页url和url属性不同，如果你填写了url属性，npm注册工具会认为你把项目发布到其他地方了，获取模块的时候不会从npm官方仓库获取，而是会重定向到url属性配置的地址。
-（原文档中用了 spit(吐)这个单词，作者表示他不是在开玩笑:）
 
 bugs
 填写一个bug提交地址或者一个邮箱，被你的模块坑到的人可以通过这里吐槽，例如：
@@ -80,6 +79,7 @@ bin
 { "name": "my-program"
 , "version": "1.2.5"
 , "bin" : { "my-program" : "./path/to/program" } }
+
 man
 制定一个或通过数组制定一些文件来让linux下的man命令查找文档地址。
 如果只有一个文件被指定的话，安装后直接使用man+模块名称，而不管man指定的文件的实际名称。例如:
@@ -151,9 +151,28 @@ repository
 "repository": "bitbucket:example/repo"
 
 "repository": "gitlab:another/repo"
+
 scripts
 scripts属性是一个对象，里边指定了项目的生命周期个各个环节需要执行的命令。key是生命周期中的事件，value是要执行的命令。
 具体的内容有 install start stop 等，详见https://docs.npmjs.com/misc/scripts
+prepublish：在打包和发布包之前运行，在npm install没有任何参数的本地运行。（见下文）
+prepare：在打包和发布包之前运行，在本地npm install没有任何参数，以及安装git依赖项时运行（见下文）。这是在之后运行prepublish，但是之前prepublishOnly。
+prepublishOnly：仅在准备和包装包装之前运行npm publish。（见下文。）
+预包装：前运行压缩包包装（上npm pack，npm publish并安装git的依赖时）
+postpack：在生成tarball之后运行并移动到其最终目的地。
+发布，postpublish：发布包后运行。
+预安装：在安装软件包之前运行
+install，postinstall：安装软件包后运行。
+preuninstall，uninstall：在卸载软件包之前运行。
+postuninstall：在卸载软件包后运行。
+preversion：在碰撞包版本之前运行。
+version：运行AFTER碰撞包版本，但提交之前。
+postversion：运行AFTER碰撞包版本，然后提交。
+pretest，test，posttest：由npm test命令运行。
+prestop，stop，poststop：由npm stop命令运行。
+prestart，start，poststart：由npm start命令运行。
+prerestart，restart，postrestart：按npm restart命令运行。注意：npm restart如果没有restart提供脚本，将运行停止和启动脚本。
+preshrinkwrap，shrinkwrap，postshrinkwrap：由npm shrinkwrap命令运行。
 
 config
 用来设置一些项目不怎么变化的项目配置，例如port等。
@@ -162,8 +181,8 @@ config
 http.createServer(...).listen(process.env.npm_package_config_port)
 可以通过npm config set foo:port 80来修改config。详见https://docs.npmjs.com/misc/config
 
-{ "name" : "foo"
-, "config" : { "port" : "8080" } }
+{ "name" : "foo", "config" : { "port" : "8080" } }
+
 dependencies
 dependencies属性是一个对象，配置模块依赖的模块列表，key是模块名称，value是版本范围，版本范围是一个字符，可以被一个或多个空格分割。
 dependencies也可以被指定为一个git地址或者一个压缩包地址。
@@ -310,9 +329,6 @@ engines
 也可以指定一些npm版本可以正确的安装你的模块，例如：
 { "engines" : { "npm" : "~1.0.20" } }
 要注意的是，除非你设置了engine-strict属性，engines属性是仅供参考的。
-
-engineStrict
-注意：这个属性已经弃用，将在npm 3.0.0 版本干掉。
 
 os
 可以指定你的模块只能在哪个操作系统上跑：
